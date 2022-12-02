@@ -2,6 +2,8 @@ class APIFeatures {
   constructor(query, queryStr) {
     (this.query = query), (this.queryStr = queryStr);
   }
+
+  //search the product using search method
   search() {
     const keyword = this.queryStr.keyword
       ? {
@@ -16,6 +18,7 @@ class APIFeatures {
     return this;
   }
 
+  //using filter method to find the product search more easily to user
   filter() {
     const queryCopy = { ...this.queryStr };
 
@@ -29,7 +32,15 @@ class APIFeatures {
       `$${match}`;
     });
 
-    this.query = this.query.find(queryStr);
+    this.query = this.query.find(JSON.parse(queryStr));
+    return this;
+  }
+
+  pagination(resPerPage) {
+    const currentPage = Number(this.queryStr.page) || 1;
+    const skip = resPerPage * (currentPage - 1);
+
+    this.query = this.query.limit(resPerPage).skip(skip);
     return this;
   }
 }
