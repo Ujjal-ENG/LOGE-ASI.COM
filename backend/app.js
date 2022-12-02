@@ -1,11 +1,14 @@
 const express = require("express");
 const app = express();
 
+const cookieParser = require("cookie-parser");
+
 //middle ware to handle errors
 const errorMiddleWare = require("./middlewares/errors");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 
 //import all routes
 
