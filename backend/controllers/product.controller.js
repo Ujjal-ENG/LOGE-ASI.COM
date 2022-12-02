@@ -1,9 +1,9 @@
 const Product = require("../models/product.model.js");
-
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors.js");
-
 const APIFeatures = require("../utils/apiFeatures.js");
+
+
 
 // Create new product => /api/v1/product/new
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
@@ -13,6 +13,8 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
     product,
   });
 });
+
+
 
 // Get all products => /api/v1/products?keyword=apple
 exports.getProducts = catchAsyncErrors(async (req, res, next) => {
@@ -33,6 +35,8 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+
+
 // get single product details => /api/v1/product/:id
 exports.getSingleProduct = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
@@ -40,12 +44,13 @@ exports.getSingleProduct = catchAsyncErrors(async (req, res, next) => {
   if (!product) {
     return next(new ErrorHandler("Product not Found", 404));
   }
-
   res.status(200).json({
     success: true,
     product,
   });
 });
+
+
 
 //update product => /api/v1/product/:id
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
@@ -58,12 +63,13 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     runValidators: true,
     useFindAndModify: false,
   });
-
   res.status(200).json({
     success: true,
     product,
   });
 });
+
+
 
 //delete product => /api/v1/admin/product/:id
 exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {

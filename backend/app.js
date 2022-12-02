@@ -11,7 +11,11 @@ app.use(express.json());
 
 const products = require("./routes/product.route");
 
+const userAuth = require("./routes/user.auth.route");
+
 app.use("/api/v1", products);
+app.use("/api/v1", userAuth);
+
 app.use(errorMiddleWare);
 
 module.exports = app;
